@@ -102,6 +102,10 @@ const (
 	MsgPasswordConfirmTransaction      = "password-confirm-transaction"
 	MsgTypeSend                        = "custody-send"
 
+	// bridge module
+	MsgTypeChangeCosmosEtherium = "change-cosmos-etherium"
+	MsgTypeChangeEtheriumCosmos = "change-etherium-cosmos"
+
 	// collectives module
 	MsgTypeCreateCollective   = "create-collective"
 	MsgTypeBondCollective     = "bond-collective"
