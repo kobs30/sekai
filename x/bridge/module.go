@@ -62,10 +62,11 @@ func (b AppModuleBasic) GetQueryCmd() *cobra.Command {
 type AppModule struct {
 	AppModuleBasic
 	bridgeKeeper bridgekeeper.Keeper
+	bankKeeper   bridgetypes.BankKeeper
 }
 
 func (am AppModule) RegisterServices(cfg module.Configurator) {
-	bridgetypes.RegisterMsgServer(cfg.MsgServer(), bridgekeeper.NewMsgServerImpl(am.bridgeKeeper))
+	bridgetypes.RegisterMsgServer(cfg.MsgServer(), bridgekeeper.NewMsgServerImpl(am.bridgeKeeper, am.bankKeeper))
 	querier := bridgekeeper.NewQuerier(am.bridgeKeeper)
 	bridgetypes.RegisterQueryServer(cfg.QueryServer(), querier)
 }
@@ -108,8 +109,9 @@ func (am AppModule) CheckTx() string {
 	return bridgetypes.ModuleName
 }
 
-func NewAppModule(keeper bridgekeeper.Keeper) AppModule {
+func NewAppModule(keeper bridgekeeper.Keeper, bk bridgetypes.BankKeeper) AppModule {
 	return AppModule{
 		bridgeKeeper: keeper,
+		bankKeeper:   bk,
 	}
 }

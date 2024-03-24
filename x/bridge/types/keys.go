@@ -6,6 +6,10 @@ var (
 	QueryRoute = ModuleName
 	StoreKey   = ModuleName
 
-	PrefixKeyBridgeCosmosEtheriumRecord = "bridge_cosmos_etherium_record_prefix_"
-	PrefixKeyBridgeEtheriumCosmosRecord = "bridge_etherium_cosmos_record_prefix_"
+	PrefixKeyBridgeCosmosEthereumRecord = "bridge_cosmos_ethereum_record_prefix_"
+	PrefixKeyBridgeEthereumCosmosRecord = "bridge_ethereum_cosmos_record_prefix_"
+
+	BridgeAddressKey                    = []byte("bridge_address")
+	BridgeCosmosEthereumExchangeRateKey = []byte("bridge_cosmos_ethereum_rate")
+	BridgeEthereumCosmosExchangeRateKey = []byte("bridge_ethereum_cosmos_rate")
 )

@@ -103,8 +103,8 @@ const (
 	MsgTypeSend                        = "custody-send"
 
 	// bridge module
-	MsgTypeChangeCosmosEtherium = "change-cosmos-etherium"
-	MsgTypeChangeEtheriumCosmos = "change-etherium-cosmos"
+	MsgTypeChangeCosmosEthereum = "change-cosmos-ethereum"
+	MsgTypeChangeEthereumCosmos = "change-ethereum-cosmos"
 
 	// collectives module
 	MsgTypeCreateCollective   = "create-collective"

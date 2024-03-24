@@ -5,55 +5,55 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func NewMsgChangeCosmosEtherium(from sdk.AccAddress, to string, in_amount sdk.Coins, out_amount int64) *MsgChangeCosmosEtherium {
-	return &MsgChangeCosmosEtherium{from, to, in_amount, out_amount}
+func NewMsgChangeCosmosEthereum(from sdk.AccAddress, to string, inAmount sdk.Coins, outAmount int64) *MsgChangeCosmosEthereum {
+	return &MsgChangeCosmosEthereum{from, to, inAmount, outAmount}
 }
 
-func (m *MsgChangeCosmosEtherium) Route() string {
+func (m *MsgChangeCosmosEthereum) Route() string {
 	return ModuleName
 }
 
-func (m *MsgChangeCosmosEtherium) Type() string {
-	return types.MsgTypeChangeCosmosEtherium
+func (m *MsgChangeCosmosEthereum) Type() string {
+	return types.MsgTypeChangeCosmosEthereum
 }
 
-func (m *MsgChangeCosmosEtherium) ValidateBasic() error {
+func (m *MsgChangeCosmosEthereum) ValidateBasic() error {
 	return nil
 }
 
-func (m *MsgChangeCosmosEtherium) GetSignBytes() []byte {
+func (m *MsgChangeCosmosEthereum) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(m)
 	return sdk.MustSortJSON(bz)
 }
 
-func (m *MsgChangeCosmosEtherium) GetSigners() []sdk.AccAddress {
+func (m *MsgChangeCosmosEthereum) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{
 		m.From,
 	}
 }
 
-func NewMsgChangeEtheriumCosmos(addr sdk.AccAddress, from string, to sdk.AccAddress, in_amount uint64, out_amount sdk.Coin) *MsgChangeEtheriumCosmos {
-	return &MsgChangeEtheriumCosmos{addr, from, to, in_amount, out_amount}
+func NewMsgChangeEthereumCosmos(addr sdk.AccAddress, from string, to sdk.AccAddress, inAmount int64, outAmount sdk.Coins) *MsgChangeEthereumCosmos {
+	return &MsgChangeEthereumCosmos{addr, from, to, inAmount, outAmount}
 }
 
-func (m *MsgChangeEtheriumCosmos) Route() string {
+func (m *MsgChangeEthereumCosmos) Route() string {
 	return ModuleName
 }
 
-func (m *MsgChangeEtheriumCosmos) Type() string {
-	return types.MsgTypeChangeCosmosEtherium
+func (m *MsgChangeEthereumCosmos) Type() string {
+	return types.MsgTypeChangeCosmosEthereum
 }
 
-func (m *MsgChangeEtheriumCosmos) ValidateBasic() error {
+func (m *MsgChangeEthereumCosmos) ValidateBasic() error {
 	return nil
 }
 
-func (m *MsgChangeEtheriumCosmos) GetSignBytes() []byte {
+func (m *MsgChangeEthereumCosmos) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(m)
 	return sdk.MustSortJSON(bz)
 }
 
-func (m *MsgChangeEtheriumCosmos) GetSigners() []sdk.AccAddress {
+func (m *MsgChangeEthereumCosmos) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{
 		m.Addr,
 	}

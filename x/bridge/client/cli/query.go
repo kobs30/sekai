@@ -17,17 +17,17 @@ func NewQueryCmd() *cobra.Command {
 		Short: "query commands for the bridge module",
 	}
 
-	queryCmd.AddCommand(GetCmdQueryChangeCosmosEtheriumByAddress())
-	queryCmd.AddCommand(GetCmdQueryChangeEtheriumCosmosByAddress())
+	queryCmd.AddCommand(GetCmdQueryChangeCosmosEthereumByAddress())
+	queryCmd.AddCommand(GetCmdQueryChangeEthereumCosmosByAddress())
 
 	return queryCmd
 }
 
-// GetCmdQueryChangeCosmosEtheriumByAddress is the querier for change by address.
-func GetCmdQueryChangeCosmosEtheriumByAddress() *cobra.Command {
+// GetCmdQueryChangeCosmosEthereumByAddress is the querier for change by address.
+func GetCmdQueryChangeCosmosEthereumByAddress() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "get_cosmos_etherium [addr]",
-		Short: "Query change from Cosmos to Etherium assigned to an address",
+		Use:   "get_cosmos_ethereum [addr]",
+		Short: "Query change from Cosmos to Ethereum assigned to an address",
 		Args:  cobra.MinimumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
@@ -37,9 +37,9 @@ func GetCmdQueryChangeCosmosEtheriumByAddress() *cobra.Command {
 				return errors.Wrap(err, "invalid account address")
 			}
 
-			params := &types.ChangeCosmosEtheriumByAddressRequest{Addr: accAddr}
+			params := &types.ChangeCosmosEthereumByAddressRequest{Addr: accAddr}
 			queryClient := types.NewQueryClient(clientCtx)
-			res, err := queryClient.ChangeCosmosEtheriumByAddress(context.Background(), params)
+			res, err := queryClient.ChangeCosmosEthereumByAddress(context.Background(), params)
 
 			if err != nil {
 				return err
@@ -54,11 +54,11 @@ func GetCmdQueryChangeCosmosEtheriumByAddress() *cobra.Command {
 	return cmd
 }
 
-// GetCmdQueryChangeEtheriumCosmosByAddress is the querier for change by address.
-func GetCmdQueryChangeEtheriumCosmosByAddress() *cobra.Command {
+// GetCmdQueryChangeEthereumCosmosByAddress is the querier for change by address.
+func GetCmdQueryChangeEthereumCosmosByAddress() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "get_etherium_cosmos [addr]",
-		Short: "Query change from Etherium to Cosmos assigned to an address",
+		Use:   "get_ethereum_cosmos [addr]",
+		Short: "Query change from Ethereum to Cosmos assigned to an address",
 		Args:  cobra.MinimumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
@@ -68,9 +68,9 @@ func GetCmdQueryChangeEtheriumCosmosByAddress() *cobra.Command {
 				return errors.Wrap(err, "invalid account address")
 			}
 
-			params := &types.ChangeEtheriumCosmosByAddressRequest{Addr: accAddr}
+			params := &types.ChangeEthereumCosmosByAddressRequest{Addr: accAddr}
 			queryClient := types.NewQueryClient(clientCtx)
-			res, err := queryClient.ChangeEtheriumCosmosByAddress(context.Background(), params)
+			res, err := queryClient.ChangeEthereumCosmosByAddress(context.Background(), params)
 
 			if err != nil {
 				return err

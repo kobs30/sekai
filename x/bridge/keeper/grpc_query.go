@@ -16,11 +16,11 @@ func NewQuerier(keeper Keeper) types.QueryServer {
 
 var _ types.QueryServer = Querier{}
 
-func (q Querier) ChangeCosmosEtheriumByAddress(c context.Context, request *types.ChangeCosmosEtheriumByAddressRequest) (*types.ChangeCosmosEtheriumByAddressResponse, error) {
+func (q Querier) ChangeCosmosEthereumByAddress(c context.Context, request *types.ChangeCosmosEthereumByAddressRequest) (*types.ChangeCosmosEthereumByAddressResponse, error) {
 	ctx := sdk.UnwrapSDKContext(c)
-	record := q.keeper.GetChangeCosmosEtheriumRecord(ctx, request.Addr)
+	record := q.keeper.GetChangeCosmosEthereumRecord(ctx, request.Addr)
 
-	return &types.ChangeCosmosEtheriumByAddressResponse{
+	return &types.ChangeCosmosEthereumByAddressResponse{
 		From:      record.From,
 		To:        record.To,
 		InAmount:  record.InAmount,
@@ -28,11 +28,11 @@ func (q Querier) ChangeCosmosEtheriumByAddress(c context.Context, request *types
 	}, nil
 }
 
-func (q Querier) ChangeEtheriumCosmosByAddress(c context.Context, request *types.ChangeEtheriumCosmosByAddressRequest) (*types.ChangeEtheriumCosmosByAddressResponse, error) {
+func (q Querier) ChangeEthereumCosmosByAddress(c context.Context, request *types.ChangeEthereumCosmosByAddressRequest) (*types.ChangeEthereumCosmosByAddressResponse, error) {
 	ctx := sdk.UnwrapSDKContext(c)
-	record := q.keeper.GetChangeEtheriumCosmosRecord(ctx, request.Addr)
+	record := q.keeper.GetChangeEthereumCosmosRecord(ctx, request.Addr)
 
-	return &types.ChangeEtheriumCosmosByAddressResponse{
+	return &types.ChangeEthereumCosmosByAddressResponse{
 		From:      record.From,
 		To:        record.To,
 		InAmount:  record.InAmount,

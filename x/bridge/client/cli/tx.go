@@ -20,15 +20,16 @@ func NewTxCmd() *cobra.Command {
 		RunE:                       client.ValidateCmd,
 	}
 
-	txCmd.AddCommand(TxChangeCosmosEtherium())
+	txCmd.AddCommand(TxChangeCosmosEthereum())
+	txCmd.AddCommand(TxChangeEthereumCosmos())
 
 	return txCmd
 }
 
-func TxChangeCosmosEtherium() *cobra.Command {
+func TxChangeCosmosEthereum() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "change",
-		Short: "Create new change request from Cosmos to Etherium",
+		Use:   "change_cosmos_ethereum",
+		Short: "Create new change request from Cosmos to Ethereum",
 		Args:  cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
@@ -45,7 +46,7 @@ func TxChangeCosmosEtherium() *cobra.Command {
 
 			outAmount, _ := strconv.ParseInt(args[3], 10, 64)
 
-			msg := types.NewMsgChangeCosmosEtherium(
+			msg := types.NewMsgChangeCosmosEthereum(
 				clientCtx.FromAddress,
 				to,
 				inAmount,
@@ -56,14 +57,48 @@ func TxChangeCosmosEtherium() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().String(OldKey, "", "Previous hash string.")
-	cmd.MarkFlagRequired(OldKey)
+	flags.AddTxFlagsToCmd(cmd)
+	cmd.MarkFlagRequired(flags.FlagFrom)
 
-	cmd.Flags().String(NewKey, "", "Next hash string.")
-	cmd.MarkFlagRequired(NewKey)
+	return cmd
+}
 
-	cmd.Flags().String(NextAddress, "", "Next address to control the settings.")
-	cmd.Flags().String(TargetAddress, "", "Target of the control request.")
+func TxChangeEthereumCosmos() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "change_ethereum_cosmos",
+		Short: "Create new change request from Ethereum to Cosmos",
+		Args:  cobra.ExactArgs(4),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientTxContext(cmd)
+			if err != nil {
+				return err
+			}
+
+			from := args[1]
+
+			to, err := sdk.AccAddressFromBech32(args[2])
+			if err != nil {
+				return err
+			}
+
+			inAmount, _ := strconv.ParseInt(args[4], 10, 64)
+
+			outAmount, err := sdk.ParseCoinsNormalized(args[3])
+			if err != nil {
+				return err
+			}
+
+			msg := types.NewMsgChangeEthereumCosmos(
+				clientCtx.FromAddress,
+				from,
+				to,
+				inAmount,
+				outAmount,
+			)
+
+			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
+		},
+	}
 
 	flags.AddTxFlagsToCmd(cmd)
 	cmd.MarkFlagRequired(flags.FlagFrom)

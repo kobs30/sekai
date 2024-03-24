@@ -13,13 +13,15 @@ import (
 type Keeper struct {
 	cdc      codec.BinaryCodec
 	storeKey storetypes.StoreKey
+	bk       types.BankKeeper
 }
 
 // NewKeeper returns instance of a keeper
-func NewKeeper(storeKey storetypes.StoreKey, cdc codec.BinaryCodec) Keeper {
+func NewKeeper(storeKey storetypes.StoreKey, cdc codec.BinaryCodec, bk types.BankKeeper) Keeper {
 	return Keeper{
 		cdc:      cdc,
 		storeKey: storeKey,
+		bk:       bk,
 	}
 }
 
